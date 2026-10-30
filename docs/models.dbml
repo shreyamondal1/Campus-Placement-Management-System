@@ -1,0 +1,116 @@
+Table User {
+    id integer [pk, increment]
+    username varchar(50) [not null, unique]
+    email varchar(100) [not null, unique]
+    password varchar(255) [not null]
+    role varchar(20) [not null]
+    status varchar(20) [default: 'Active']
+    created_at datetime [note: 'Default: current IST datetime']
+    updated_at datetime [note: 'Default: current IST datetime. Auto-updated on record update.']
+}
+
+Table Company {
+    id integer [pk, increment]
+    user_id integer [not null, unique, ref: - User.id]
+    name varchar(100) [not null]
+    description text
+    industry varchar(100)
+    type varchar(100)
+    website varchar(200) [not null]
+    hr_contact_name varchar(100) [not null]
+    hr_contact_number varchar(20) [not null]
+    approval_status varchar(20) [default: 'Pending']
+}
+
+Table Student {
+    id integer [pk, increment]
+    user_id integer [not null, unique, ref: - User.id]
+    name varchar(100) [not null]
+    contact_number varchar(20) [not null]
+    degree varchar(100) [not null]
+    department varchar(100) [not null]
+    graduation_year integer [not null]
+    cgpa numeric(4,2) [not null]
+    skills text
+    certifications text
+    achievements text
+    linkedin varchar(200)
+    github varchar(200)
+    portfolio varchar(200)
+    resume varchar(200) [not null]
+}
+
+Table Education {
+    id integer [pk, increment]
+    student_id integer [not null, ref: > Student.id]
+    degree varchar(100) [not null]
+    institution varchar(100) [not null]
+    start_date date [not null]
+    end_date date [not null]
+    coursework text [not null]
+}
+
+Table Experience {
+    id integer [pk, increment]
+    student_id integer [not null, ref: > Student.id]
+    role varchar(100) [not null]
+    organization varchar(100) [not null]
+    start_date date [not null]
+    end_date date [not null]
+    description text [not null]
+}
+
+Table Project {
+    id integer [pk, increment]
+    student_id integer [not null, ref: > Student.id]
+    name varchar(100) [not null]
+    link varchar(200) [not null]
+    description text [not null]
+}
+
+Table Drive {
+    id integer [pk, increment]
+    company_id integer [not null, ref: > Company.id]
+    job_title varchar(100) [not null]
+    job_description text [not null]
+    job_location varchar(100) [not null]
+    job_type varchar(20) [not null]
+    job_mode varchar(20) [not null]
+    salary_package numeric(10,2) [not null]
+    eligibility_criteria text
+    minimum_cgpa numeric(4,2)
+    application_start datetime [not null]
+    application_deadline datetime [not null]
+    approval_status varchar(20) [default: 'Pending']
+    created_at datetime [note: 'Default: current IST datetime']
+    updated_at datetime [note: 'Default: current IST datetime. Auto-updated on record update.']
+}
+
+Table Application {
+    id integer [pk, increment]
+    student_id integer [not null, ref: > Student.id]
+    drive_id integer [not null, ref: > Drive.id]
+    status varchar(20) [default: 'Applied']
+    created_at datetime [note: 'Default: current IST datetime']
+    updated_at datetime [note: 'Default: current IST datetime. Auto-updated on record update.']
+}
+
+Table Interview {
+    id integer [pk, increment]
+    application_id integer [not null, unique, ref: - Application.id]
+    start_datetime datetime [not null]
+    end_datetime datetime [not null]
+    mode varchar(20) [not null]
+    status varchar(20) [default: 'Scheduled']
+    created_at datetime [note: 'Default: current IST datetime']
+    updated_at datetime [note: 'Default: current IST datetime. Auto-updated on record update.']
+}
+
+Table Placement {
+    id integer [pk, increment]
+    interview_id integer [not null, unique, ref: - Interview.id]
+    joining_datetime datetime [not null]
+    status varchar(20) [default: 'Offered']
+    created_at datetime [note: 'Default: current IST datetime']
+    updated_at datetime [note: 'Default: current IST datetime. Auto-updated on record update.']
+}

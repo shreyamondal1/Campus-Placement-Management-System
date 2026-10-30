@@ -1,0 +1,39 @@
+.app-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+.app-header {
+    height: 60px;
+    background-color: #1f4e79;
+}
+
+.app-navbar {
+    height: 50px;
+    background-color: #2b6aa3;
+}
+.app-navbar .nav-link {
+    color: white;
+}
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+    color: #abcefc;
+}
+.app-navbar .nav-menu {
+    color: white;
+}
+.app-navbar .nav-menu:hover,
+.app-navbar .nav-menu:focus {
+    color: #8abdff;
+}
+
+.main-content {
+    min-height: calc(100vh - 150px);
+}
+
+.app-footer {
+    height: 40px;
+    background-color: #34495e;
+}
+
+/* 3949ab 163a5f 24527a e9eef4 */
